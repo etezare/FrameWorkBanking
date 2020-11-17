@@ -1,13 +1,32 @@
 package framework.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Customer {
+
+	List<Account> accountList = new ArrayList<>();
+
 	private String customerId;
 	private String name;
+	private String email;
 
-	public Customer(String customerId, String name) {
-		this.name = name;
-		this.customerId = customerId;
+	public List<Account> getAccountList() {
+		return accountList;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setAccountList(List<Account> accountList) {
+		this.accountList = accountList;
+	}
+
 	public String getName() {
 		return name;
 	}

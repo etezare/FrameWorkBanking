@@ -15,7 +15,10 @@ public class Customers {
     {
       String customerId 	= String.format("%05d", i);
       String customerName = faker.name().fullName();
-      customers.add(new Customer(customerId, customerName));
+      Customer c = new Customer();
+      c.setCustomerId(customerId);
+      c.setName(customerName);
+      customers.add(c);
     }
   }
 

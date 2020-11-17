@@ -1,20 +1,17 @@
 package framework.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Account {
+public abstract class Account {
 	
 	private Customer customer;
 
 	private String accountNumber;
 
 	private List<AccountEntry> entryList = new ArrayList<AccountEntry>();
-
-	public Account(String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
 
 	public String getAccountNumber() {
 		return accountNumber;
@@ -68,5 +65,4 @@ public class Account {
 	public Collection<AccountEntry> getEntryList() {
 		return entryList;
 	}
-
 }
