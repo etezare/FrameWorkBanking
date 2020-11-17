@@ -1,6 +1,7 @@
 package framework.service;
 
 import framework.dao.AccountDAO;
+import framework.database.Accounts;
 import framework.model.Account;
 import framework.model.AccountEntry;
 import framework.model.Company;
@@ -29,6 +30,11 @@ public class AccountServiceImpl implements AccountService {
   }
 
   @Override
+  public List<Account> getList() {
+    return accountDAO.getList();
+  }
+
+  @Override
   public Account createAccount(String accountNumber, String customerId, String type) {
     Account account = AccountFactory.createAccount(type);
 
@@ -37,6 +43,7 @@ public class AccountServiceImpl implements AccountService {
     Customer customer = customerService.getCustomer(customerId);
     account.setCustomer(customer);
 
+    accountDAO.add(account);
     return account;
   }
 

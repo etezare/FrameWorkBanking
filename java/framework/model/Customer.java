@@ -3,13 +3,23 @@ package framework.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer {
+public abstract class Customer {
 
 	List<Account> accountList = new ArrayList<>();
 
 	private String customerId;
 	private String name;
 	private String email;
+
+	private String type;
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public List<Account> getAccountList() {
 		return accountList;
