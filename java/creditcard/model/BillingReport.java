@@ -31,8 +31,8 @@ public class BillingReport {
             Collection<AccountEntry> accountEntryList = creditCardAccount.getEntryList();
 
             double previousBalance =calculatePreviousBalance(creditCardAccount,accountEntryList);
-            double totalCredits = calculateTotal("charged",accountEntryList);
-            double totalCharges = calculateTotal("paid",accountEntryList);
+            double totalCredits = calculateTotal("paid",accountEntryList);
+            double totalCharges = calculateTotal("charged",accountEntryList);
             double newBalance =calculateNewBalance(previousBalance,totalCredits,totalCharges,creditCardAccount);
             double totalDue = calculateTotalDue(creditCardAccount,newBalance);
             System.out.println("----------billing Report--------------------------");
