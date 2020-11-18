@@ -1,7 +1,9 @@
 package framework.util;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class DateUtils {
   public static final String MM_DD_YYYY = "MM/dd/yyyy";
@@ -22,5 +24,11 @@ public class DateUtils {
 
     //convert String to LocalDate
     return LocalDate.parse(dateString, formatter);
+  }
+
+  public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+    return dateToConvert.toInstant()
+        .atZone(ZoneId.systemDefault())
+        .toLocalDate();
   }
 }
