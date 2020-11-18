@@ -8,7 +8,10 @@ import framework.model.Account;
 import framework.model.AccountEntry;
 import framework.model.Address;
 import framework.model.Customer;
+import framework.service.template.CreditBillingReport;
+import framework.service.template.MonthlyBillingReport;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Application {
@@ -16,9 +19,9 @@ public class Application {
 		CreditAccountService accountService = new CreditAccountServiceImpl();
 
 		Address address=new Address("7514geren","Iowa",12343,"fairfiled");
-		CustomerCredit customer=new CustomerCredit("Essey","etezare@miu.edu",address,"company");
-		CustomerCredit customer2=new CustomerCredit("Dawit","dhailu@miu.edu",address,"personal");
-		CustomerCredit customer3=new CustomerCredit("Brhane","bteklehaimanot@miu.edu",address,"personal");
+		CustomerCredit customer=new CustomerCredit("Essey","etezare@miux.edu",address,"company");
+		CustomerCredit customer2=new CustomerCredit("Dawit","dhailu@miux.edu",address,"personal");
+		CustomerCredit customer3=new CustomerCredit("Brhane","bteklehaimanot@miux.edu",address,"personal");
 		// create 2 accounts;
 		accountService.createAccount("1263862", customer,"bronze");
 		accountService.createAccount("4253892", customer2,"gold");
@@ -34,7 +37,10 @@ public class Application {
 		accountService.withdraw("4253892",500);
 //		accountService.transferFunds("4253892", "1263862", 100, "payment of invoice 10232");
 		// show balances
-		List<String> reports=accountService.billingReport();
+		System.out.println("Bill Report Credit Card");
+		MonthlyBillingReport monthlyBillingReport = new CreditBillingReport(accountService.getList());
+		monthlyBillingReport.showReport();
+		System.out.println("End of Bill Report Credit Card");
 		accountService.addInterest();
 		List<Account> accountlist = accountService.getList();
 		Customer customer4=null;

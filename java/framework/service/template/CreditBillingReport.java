@@ -6,13 +6,10 @@ import framework.model.Account;
 import framework.model.AccountEntry;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
-public class CreditBillingReport {
+public class CreditBillingReport extends MonthlyBillingReport{
     private Collection<Account>creditCardAccounts;
     private LocalDate lastMonth;
     public CreditBillingReport(Collection<Account> accounts) {
@@ -60,9 +57,10 @@ public class CreditBillingReport {
         }
         return reports;
     }
-    public double calculateTotal(String decsription,Collection<AccountEntry>accountEntryList){
+    public double calculateTotal(String decsription, Collection<AccountEntry>accountEntryList){
 
         double total=0;
+
         for (AccountEntry accountEntry : accountEntryList) {
             if (accountEntry.getDate().compareTo(lastMonth) > 0) {
                 if (accountEntry.getDescription().equalsIgnoreCase(decsription)) {
@@ -91,5 +89,24 @@ public class CreditBillingReport {
         return creditCardAccount.getCreditCardMonthlyRole().monthlyInterest(newBalance);
     }
 
+
+    @Override
+    void showPreviousBalance(LocalDate reportDate) {
+        System.out.println(String.format("Credit Card Billing Report - As of " + LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))));
+    }
+
+    @Override
+    void showTotalCredit(LocalDate reportDate) {}
+
+    @Override
+    void showTotalDebit(LocalDate reportDate) {}
+
+    @Override
+    void showBalance(LocalDate reportDate) {
+        List<String> billReport = getBillingReport();
+        billReport.forEach(x -> {
+            System.out.println(x);
+        });
+    }
 
 }

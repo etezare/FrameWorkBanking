@@ -10,11 +10,6 @@ import java.util.List;
 public class Accounts {
   public static List<Account> accounts = new ArrayList<>();
 
-//  private Customer customer;
-//  private String accountNumber;
-//deposit
-  //withdraw
-
   static {
     Faker faker = new Faker();
 
