@@ -1,4 +1,4 @@
-package ui.ccard;
+package creditcard.ui;
 
 import java.awt.BorderLayout;
 
