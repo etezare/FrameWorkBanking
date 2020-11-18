@@ -1,7 +1,6 @@
 package framework.service;
 
 import framework.dao.AccountDAO;
-import framework.database.Accounts;
 import framework.model.Account;
 import framework.model.AccountEntry;
 import framework.model.Company;
@@ -78,12 +77,14 @@ public class AccountServiceImpl implements AccountService {
 
   private void notify(Account account, double amount) {
     Customer c = account.getCustomer();
-    String email = c.getEmail();
-    if (c instanceof Company){
-      notifyObserver(account);
-    } else if (c instanceof Personal) {
-      if (amount > 500 || account.getBalance() >500) {
+
+    if (c != null) {
+      if (c instanceof Company){
         notifyObserver(account);
+      } else if (c instanceof Personal) {
+        if (amount > 500 || account.getBalance() >500) {
+          notifyObserver(account);
+        }
       }
     }
   }

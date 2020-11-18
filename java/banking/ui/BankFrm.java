@@ -4,6 +4,8 @@ import framework.model.Account;
 import framework.model.CheckingAccount;
 import framework.service.AccountService;
 import framework.service.AccountServiceImpl;
+import framework.service.command.DepositCommand;
+import framework.service.command.WithdrawCommand;
 import framework.service.factory.AccountFactory;
 
 import javax.swing.*;
@@ -266,10 +268,14 @@ public class BankFrm extends JFrame {
 
 			// compute new amount
 			long deposit = Long.parseLong(amountDeposit);
-			String samount = (String) model.getValueAt(selection, 5);
-			long currentamount = Long.parseLong(samount);
-			long newamount = currentamount + deposit;
-			model.setValueAt(String.valueOf(newamount), selection, 5);
+//			String samount = (String) model.getValueAt(selection, 5);
+//			long currentamount = Long.parseLong(samount);
+//			long newamount = currentamount + deposit;
+//			model.setValueAt(String.valueOf(newamount), selection, 5);
+
+			String accountNumber = (String) model.getValueAt(selection, 0);
+			new DepositCommand().execute(accountNumber, deposit);
+			loadAll();
 		}
 
 
@@ -288,13 +294,17 @@ public class BankFrm extends JFrame {
 
 			// compute new amount
 			long deposit = Long.parseLong(amountDeposit);
-			String samount = (String) model.getValueAt(selection, 5);
-			long currentamount = Long.parseLong(samount);
-			long newamount = currentamount - deposit;
-			model.setValueAt(String.valueOf(newamount), selection, 5);
-			if (newamount < 0) {
-				JOptionPane.showMessageDialog(JButton_Withdraw, " Account " + accnr + " : balance is negative: $" + String.valueOf(newamount) + " !", "Warning: negative balance", JOptionPane.WARNING_MESSAGE);
-			}
+//			String samount = (String) model.getValueAt(selection, 5);
+//			long currentamount = Long.parseLong(samount);
+//			long newamount = currentamount - deposit;
+//			model.setValueAt(String.valueOf(newamount), selection, 5);
+//			if (newamount < 0) {
+//				JOptionPane.showMessageDialog(JButton_Withdraw, " Account " + accnr + " : balance is negative: $" + String.valueOf(newamount) + " !", "Warning: negative balance", JOptionPane.WARNING_MESSAGE);
+//			}
+
+			String accountNumber = (String) model.getValueAt(selection, 0);
+			new WithdrawCommand().execute(accountNumber, deposit);
+			loadAll();
 		}
 
 
@@ -308,9 +318,12 @@ public class BankFrm extends JFrame {
 
 	private void loadAll() {
 		List<Account> accounts = accountService.getList();
-
-		if (accounts.size() > 0) {
-			Account account = accounts.get(accounts.size()-1);
+		if (model.getRowCount() > 0) {
+			for (int i = model.getRowCount() - 1; i > -1; i--) {
+				model.removeRow(i);
+			}
+		}
+		for (Account account : accounts) {
 			rowdata[0] = account.getAccountNumber();
 			rowdata[1] = account.getCustomer() == null ? "" : account.getCustomer().getName();
 			rowdata[2] = "city";
