@@ -73,6 +73,11 @@ public class CardFrm extends javax.swing.JFrame
 		JButton_GenBill.setActionCommand("jbutton");
 		JPanel1.add(JButton_GenBill);
 		JButton_GenBill.setBounds(240,20,192,33);
+
+		JButton_Addinterest.setBounds(448,20,110,33);
+		JButton_Addinterest.setText("Add interest");
+		JPanel1.add(JButton_Addinterest);
+
 		JButton_Deposit.setText("Deposit");
 		JPanel1.add(JButton_Deposit);
 		JButton_Deposit.setBounds(468,104,96,33);
@@ -94,7 +99,7 @@ public class CardFrm extends javax.swing.JFrame
 		JButton_GenBill.addActionListener(lSymAction);
 		JButton_Deposit.addActionListener(lSymAction);
 		JButton_Withdraw.addActionListener(lSymAction);
-
+		JButton_Addinterest.addActionListener(lSymAction);
 		loadAll();
 		
 	}
@@ -134,7 +139,7 @@ public class CardFrm extends javax.swing.JFrame
 	javax.swing.JButton JButton_Deposit = new javax.swing.JButton();
 	javax.swing.JButton JButton_Withdraw = new javax.swing.JButton();
 	javax.swing.JButton JButton_Exit = new javax.swing.JButton();
-
+	JButton JButton_Addinterest = new JButton();
 
 	void exitApplication()
 	{
@@ -185,7 +190,8 @@ public class CardFrm extends javax.swing.JFrame
 				JButtonDeposit_actionPerformed(event);
 			else if (object == JButton_Withdraw)
 				JButtonWithdraw_actionPerformed(event);
-			
+			else if (object == JButton_Addinterest)
+				JButtonAddinterest_actionPerformed(event);
 		}
 	}
     
@@ -315,5 +321,10 @@ public class CardFrm extends javax.swing.JFrame
 			newaccount = false;
 		}
 	}
-	
+
+	void JButtonAddinterest_actionPerformed(java.awt.event.ActionEvent event) {
+
+		accountService.addInterest();
+		loadAll();
+	}
 }
