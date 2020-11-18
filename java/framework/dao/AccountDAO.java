@@ -34,8 +34,8 @@ public class AccountDAO implements DAO<Account, String> {
 	@Override
 	public boolean update(Account a) {
 		Account entity = getById(a.getAccountNumber());
-		if (entity != null) {
-			Accounts.accounts.remove(entity); // remove the old
+		if (entity != null && !Accounts.accounts.contains(a)) {
+//			Accounts.accounts.remove(entity); // remove the old
 			Accounts.accounts.add(a); // add the new
 		}
 		return true;
