@@ -1,6 +1,10 @@
 package creditcard.ui;
 
 
+import creditcard.model.CustomerCredit;
+import framework.model.Address;
+import framework.service.factory.CustomerFactory;
+
 public class JDialog_AddCompAcc extends javax.swing.JDialog
 {
     private CardFrm parentframe;
@@ -136,6 +140,17 @@ public class JDialog_AddCompAcc extends javax.swing.JDialog
            else
            parentframe.accountType="S";
 	   parentframe.newaccount=true;
+
+		Address address = new Address(parentframe.street, parentframe.state,
+				Long.parseLong(parentframe.zip),parentframe.city);
+
+		CustomerCredit customer = new CustomerCredit(parentframe.clientName, "",
+				address, parentframe.accountType);
+
+		parentframe.accountService.createAccount("",
+				customer,
+				CustomerFactory.COMPANY);
+
 	   dispose();
 			 
 	}

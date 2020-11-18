@@ -2,10 +2,10 @@ package banking.ui;
 
 import banking.service.BankingAccountService;
 import banking.service.BankingAccountServiceImpl;
+import banking.service.command.DepositCommand;
+import banking.service.command.WithdrawCommand;
 import framework.model.Account;
 import framework.model.CheckingAccount;
-import framework.service.command.DepositCommand;
-import framework.service.command.WithdrawCommand;
 import framework.service.factory.AccountFactory;
 
 import javax.swing.*;

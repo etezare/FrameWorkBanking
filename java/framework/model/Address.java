@@ -47,4 +47,14 @@ public class Address {
     public void setCity(String city) {
         this.city = city;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+            "street='" + street + '\'' +
+            ", state='" + state + '\'' +
+            ", zip=" + zip +
+            ", city='" + city + '\'' +
+            '}';
+    }
 }

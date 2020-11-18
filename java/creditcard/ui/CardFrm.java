@@ -1,18 +1,25 @@
 package creditcard.ui;
 
-import java.awt.BorderLayout;
+import creditcard.model.CreditCardAccount;
+import creditcard.service.CreditAccountService;
+import creditcard.service.CreditAccountServiceImpl;
+import creditcard.service.command.CreditDepositCommand;
+import creditcard.service.command.CreditWithdrawCommand;
+import framework.model.Account;
+import framework.util.DateUtils;
 
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.util.List;
 
 /**
  * A basic JFC based application.
  */
 public class CardFrm extends javax.swing.JFrame
 {
+		public CreditAccountService accountService = new CreditAccountServiceImpl();
+
     /****
      * init variables in the object
      ****/
@@ -87,6 +94,8 @@ public class CardFrm extends javax.swing.JFrame
 		JButton_GenBill.addActionListener(lSymAction);
 		JButton_Deposit.addActionListener(lSymAction);
 		JButton_Withdraw.addActionListener(lSymAction);
+
+		loadAll();
 		
 	}
 
@@ -199,20 +208,21 @@ public class CardFrm extends javax.swing.JFrame
 		ccac.setBounds(450, 20, 300, 380);
 		ccac.show();
 
-		if (newaccount){
-            // add row to table
-            rowdata[0] = clientName;
-            rowdata[1] = ccnumber;
-            rowdata[2] = expdate;
-            rowdata[3] = accountType;
-            rowdata[4] = "0";
-            model.addRow(rowdata);
-            JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
-            newaccount=false;
-        }
-
-       
-        
+//		if (newaccount){
+//            // add row to table
+//            rowdata[0] = clientName;
+//            rowdata[1] = ccnumber;
+//            rowdata[2] = expdate;
+//            rowdata[3] = accountType;
+//            rowdata[4] = "0";
+//            model.addRow(rowdata);
+//            JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
+//            newaccount=false;
+//        }
+//
+//
+//
+		loadAll();
     }
 
 	void JButtonGenerateBill_actionPerformed(java.awt.event.ActionEvent event)
@@ -237,10 +247,14 @@ public class CardFrm extends javax.swing.JFrame
     		
 		    // compute new amount
             long deposit = Long.parseLong(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 4);
-            long currentamount = Long.parseLong(samount);
-		    long newamount=currentamount+deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 4);
+//            String samount = (String)model.getValueAt(selection, 4);
+//            long currentamount = Long.parseLong(samount);
+//		    long newamount=currentamount+deposit;
+//		    model.setValueAt(String.valueOf(newamount),selection, 4);
+
+				String accountNumber = (String) model.getValueAt(selection, 1);
+				new CreditDepositCommand().execute(accountNumber, deposit);
+				loadAll();
 		}
 		
 		
@@ -260,16 +274,46 @@ public class CardFrm extends javax.swing.JFrame
     		
 		    // compute new amount
             long deposit = Long.parseLong(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 4);
-            long currentamount = Long.parseLong(samount);
-		    long newamount=currentamount-deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 4);
-		    if (newamount <0){
-		       JOptionPane.showMessageDialog(JButton_Withdraw, " "+name+" Your balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
-		    }
+//            String samount = (String)model.getValueAt(selection, 4);
+//            long currentamount = Long.parseLong(samount);
+//		    long newamount=currentamount-deposit;
+//		    model.setValueAt(String.valueOf(newamount),selection, 4);
+//		    if (newamount <0){
+//		       JOptionPane.showMessageDialog(JButton_Withdraw, " "+name+" Your balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
+//		    }
+
+					String accountNumber = (String) model.getValueAt(selection, 1);
+					new CreditWithdrawCommand().execute(accountNumber, deposit);
+					loadAll();
 		}
 		
 		
+	}
+
+	private void loadAll() {
+		List<Account> accounts = accountService.getList();
+		if (model.getRowCount() > 0) {
+			for (int i = model.getRowCount() - 1; i > -1; i--) {
+				model.removeRow(i);
+			}
+		}
+		for (Account account : accounts) {
+//			rowdata[0] = clientName;
+//			rowdata[1] = ccnumber;
+//			rowdata[2] = expdate;
+//			rowdata[3] = accountType;
+//			rowdata[4] = "0";
+
+			CreditCardAccount ccAccount = (CreditCardAccount) account;
+			rowdata[0] = ccAccount.getCustomer() == null ? "" : ccAccount.getCustomer().getName();
+			rowdata[1] = ccAccount.getAccountNumber();
+			rowdata[2] = DateUtils.localDateToString(ccAccount.getExpirationDate());
+			rowdata[3] = ccAccount.getAccountType();
+			rowdata[4] = ccAccount.getBalance();
+			model.addRow(rowdata);
+			JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
+			newaccount = false;
+		}
 	}
 	
 }

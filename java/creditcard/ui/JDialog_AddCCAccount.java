@@ -3,6 +3,10 @@ package creditcard.ui;
 		A basic implementation of the JDialog class.
 */
 
+import creditcard.model.CustomerCredit;
+import framework.model.Address;
+import framework.service.factory.CustomerFactory;
+
 public class JDialog_AddCCAccount extends javax.swing.JDialog
 {
     private CardFrm parentframe;
@@ -201,6 +205,17 @@ public class JDialog_AddCCAccount extends javax.swing.JDialog
            }
            
 	   parentframe.newaccount=true;
+
+		Address address = new Address(parentframe.street, parentframe.state,
+				Long.parseLong(parentframe.zip),parentframe.city);
+
+		CustomerCredit customer = new CustomerCredit(parentframe.clientName, JTextField_Email.getText(),
+				address, CustomerFactory.PERSONAL);
+
+		parentframe.accountService.createAccount(JTextField_CCNR.getText(),
+				customer,
+				parentframe.accountType);
+
        dispose();
 	}
 

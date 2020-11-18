@@ -7,7 +7,11 @@ import framework.model.AccountEntry;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 public class CreditBillingReport extends MonthlyBillingReport{
     private Collection<Account>creditCardAccounts;
@@ -82,7 +86,8 @@ public class CreditBillingReport extends MonthlyBillingReport{
     }
 
     public double calculateNewBalance(double previousBalance,double totalCredits,double totalCharges,CreditCardAccount creditCardAccount){
-        return  previousBalance - totalCredits + totalCharges + (creditCardAccount.getCreditCardMonthlyRole().monthlyInterest((previousBalance - totalCredits)));
+        return  previousBalance - totalCredits + totalCharges +
+            (creditCardAccount.getCreditCardMonthlyRole().monthlyInterest((previousBalance - totalCredits)));
     }
 
     public double calculateTotalDue(CreditCardAccount creditCardAccount,double newBalance){

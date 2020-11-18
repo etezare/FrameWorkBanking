@@ -6,7 +6,7 @@ import framework.model.AccountEntry;
 
 import java.time.LocalDate;
 
-public  class CreditCardAccount extends Account {
+public class CreditCardAccount extends Account {
 
 	private LocalDate expirationDate;
 
