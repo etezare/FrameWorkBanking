@@ -5,6 +5,7 @@ import creditcard.model.Customer;
 import creditcard.observer.Observer;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface AccountService {
 
@@ -16,7 +17,6 @@ public interface AccountService {
 
     void deposit (String accountNumber, double amount);
     void withdraw (String accountNumber, double amount);
-//    void transferFunds(String fromAccountNumber, String toAccountNumber, double amount, String description);
     void addObserver(Observer observer);
 
     void removeObservable(Observer observer);
@@ -27,5 +27,5 @@ public interface AccountService {
 
     void minimumPaid();
 
-    void billingReport(String accountNumber);
+    List<String> billingReport();
 }

@@ -8,11 +8,13 @@ public class Customer {
 	private String name;
 	private String email;
 	private Address address;
+	private String customerType;
 
-	public Customer(String name, String email, Address address) {
+	public Customer(String name, String email, Address address,String customerType) {
 		this.name = name;
 		this.email = email;
 		this.address = address;
+		this.customerType=customerType;
 	}
 
 	public String getName() {
@@ -33,6 +35,14 @@ public class Customer {
 
 	public Address getAddress() {
 		return address;
+	}
+
+	public String getCustomerType() {
+		return customerType;
+	}
+
+	public void setCustomerType(String customerType) {
+		this.customerType = customerType;
 	}
 
 	public void setAddress(Address address) {

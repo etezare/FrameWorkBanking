@@ -6,21 +6,23 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public abstract class CreditCardAccount {
+public  class CreditCardAccount {
 	private Customer customer;
 	private LocalDate expirationDate;
 	private String accountNumber;
-	CreditCardMonthlyRole creditCardMonthlyRole;
-	Collection<AccountEntry> entryList = new ArrayList<AccountEntry>();
-//	private String accountType;
+	private CreditCardMonthlyRole creditCardMonthlyRole;
+	private Collection<AccountEntry> entryList = new ArrayList<AccountEntry>();
+	private String accountType;
 
-	public CreditCardAccount(LocalDate expirationDate, String accountNumber) {
+	public CreditCardAccount(LocalDate expirationDate, String accountNumber,String accuntType) {
 		this.expirationDate = expirationDate;
 		this.accountNumber = accountNumber;
+		this.accountType=accuntType;
 	}
 
-	public CreditCardAccount(String accountNumber) {
+	public CreditCardAccount(String accountNumber,String accountType) {
 		this.accountNumber = accountNumber;
+		this.accountType=accountType;
 	}
 
 	public String getAccountNumber() {
@@ -54,19 +56,8 @@ public abstract class CreditCardAccount {
 		entryList.add(entry);
 	}
 
-//	public void transferFunds(CreditCardAccount toCreditCardAccount, double amount, String description) {
-//		AccountEntry fromEntry = new AccountEntry(-amount, description, toCreditCardAccount.getAccountNumber(),
-//				toCreditCardAccount.getCustomer().getName());
-//		AccountEntry toEntry = new AccountEntry(amount, description, toCreditCardAccount.getAccountNumber(),
-//				toCreditCardAccount.getCustomer().getName());
-//
-//		entryList.add(fromEntry);
-//
-//		toCreditCardAccount.addEntry(toEntry);
-//	}
-
 	public void addMonthlyInterest() {
-		System.out.println("Account Number: " + accountNumber + " Account Type: "+this.getType() + " Account Balance: " + getBalance() + " Interest: " + creditCardMonthlyRole.monthlyInterest(getBalance()));
+		System.out.println("Account Number: " + accountNumber + " Account Type: "+getAccountType() + " Account Balance: " + getBalance() + " Interest: " + creditCardMonthlyRole.monthlyInterest(getBalance()));
 		AccountEntry entry = new AccountEntry(LocalDate.now(), creditCardMonthlyRole.monthlyInterest(getBalance()),
 				"interest",
 				accountNumber,
@@ -76,7 +67,7 @@ public abstract class CreditCardAccount {
 		System.out.println("-----------------------------------------------------------");
 	}
 	public void minimumPayment() {
-		System.out.println("Account Number: " + accountNumber + " Account Type: "+this.getType() + " Account Balance: " + getBalance() + " Interest: " + creditCardMonthlyRole.monthlyInterest(getBalance()));
+		System.out.println("Account Number: " + accountNumber + " Account Type: "+accountType+ " Account Balance: " + getBalance() + " Interest: " + creditCardMonthlyRole.monthlyInterest(getBalance()));
 		AccountEntry entry = new AccountEntry(LocalDate.now(), creditCardMonthlyRole.minimumPayment(getBalance()),
 				"interest",
 				accountNumber,
@@ -85,15 +76,6 @@ public abstract class CreditCardAccount {
 		System.out.println("New Balance after adding interest: " + getBalance());
 		System.out.println("-----------------------------------------------------------");
 	}
-//
-//	public String getAccountType() {
-//		return accountType;
-//	}
-//
-//	public void setAccountType(String accountType) {
-//		this.accountType = accountType;
-//	}
-
 
 	public CreditCardMonthlyRole getCreditCardMonthlyRole() {
 		return creditCardMonthlyRole;
@@ -108,6 +90,7 @@ public abstract class CreditCardAccount {
 	}
 
 	public void setCustomer(Customer customer) {
+		customer.addCreditCardAccount(this);
 		this.customer = customer;
 	}
 
@@ -119,9 +102,16 @@ public abstract class CreditCardAccount {
 		return expirationDate;
 	}
 
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
 	public void setExpirationDate(LocalDate expirationDate) {
 		this.expirationDate = expirationDate;
 	}
-	public abstract String getType();
 
 }
