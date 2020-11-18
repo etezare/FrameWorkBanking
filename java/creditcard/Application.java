@@ -5,6 +5,7 @@ import creditcard.service.AccountService;
 import creditcard.service.AccountServiceImpl;
 
 import java.util.Collection;
+import java.util.List;
 
 public class Application {
 	public static void main(String[] args) {
@@ -29,7 +30,7 @@ public class Application {
 		accountService.withdraw("4253892",500);
 //		accountService.transferFunds("4253892", "1263862", 100, "payment of invoice 10232");
 		// show balances
-		accountService.billingReport("1263862");
+		List<String> reports=accountService.billingReport();
 		accountService.addInterest();
 		Collection<CreditCardAccount> accountlist = accountService.getAllAccounts();
 		Customer customer4=null;
