@@ -9,7 +9,7 @@ import java.util.List;
 public interface AccountService {
     List<Account> getList();
 
-    Account createAccount(String accountNumber, String customerId, String type);
+    Account createAccount(String accountNumber, String customerId, String type, String customerType);
     Account getAccount(String accountNumber);
     List<Account> getAllAccounts();
     void deposit (String accountNumber, double amount);

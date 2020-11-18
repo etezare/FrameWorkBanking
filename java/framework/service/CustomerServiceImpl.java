@@ -4,6 +4,7 @@ import framework.dao.CustomerDAO;
 import framework.model.Company;
 import framework.model.Customer;
 import framework.model.Personal;
+import framework.service.factory.CustomerFactory;
 
 import java.util.Collection;
 
@@ -19,13 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer createCustomer(String customerId, String customerName, String type) {
-		Customer cus = null;
-
-		if (COMPANY.equals(type)) {
-			cus = new Company();
-		} else {
-			cus = new Personal();
-		}
+		Customer cus = CustomerFactory.create(type);
 
 		cus.setCustomerId(customerId);
 		cus.setName(customerName);

@@ -7,6 +7,7 @@ import framework.model.Company;
 import framework.model.Customer;
 import framework.model.Personal;
 import framework.service.factory.AccountFactory;
+import framework.service.factory.CustomerFactory;
 import framework.service.observer.EmailSender;
 import framework.service.observer.Observer;
 import framework.service.strategy.BankInterestStrategy;
@@ -34,12 +35,18 @@ public class AccountServiceImpl implements AccountService {
   }
 
   @Override
-  public Account createAccount(String accountNumber, String customerId, String type) {
+  public Account createAccount(String accountNumber, String customerId, String type, String customerType) {
     Account account = AccountFactory.createAccount(type);
 
     account.setAccountNumber(accountNumber);
 
     Customer customer = customerService.getCustomer(customerId);
+
+    if (customer == null) {
+      customer = customerService.createCustomer(customerId, "No Name", customerType);
+    }
+
+    customer.getAccountList().add(account);
     account.setCustomer(customer);
 
     accountDAO.add(account);

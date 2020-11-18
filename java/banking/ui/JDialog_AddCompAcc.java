@@ -2,6 +2,7 @@ package banking.ui;
 
 
 import framework.service.factory.AccountFactory;
+import framework.service.factory.CustomerFactory;
 
 public class JDialog_AddCompAcc extends javax.swing.JDialog
 {
@@ -149,7 +150,8 @@ public class JDialog_AddCompAcc extends javax.swing.JDialog
 
 		parentframe.accountService.createAccount(JTextField_ACNR.getText(),
 				JTextField_NAME.getText(),
-				JRadioButton_Chk.isSelected() ? AccountFactory.CHECKING : AccountFactory.SAVING);
+				JRadioButton_Chk.isSelected() ? AccountFactory.CHECKING : AccountFactory.SAVING,
+				CustomerFactory.COMPANY);
 
 	   dispose();
 			 
