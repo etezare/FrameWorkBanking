@@ -6,7 +6,11 @@ import java.util.Collection;
 import java.util.List;
 
 public abstract class Account {
-	
+
+	public  Account(){}
+	public Account(String accountNumber){
+		this.accountNumber = accountNumber;
+	}
 	private Customer customer;
 
 	private String accountNumber;

@@ -5,12 +5,13 @@ import framework.model.Company;
 import framework.model.Customer;
 import framework.model.Personal;
 import framework.service.factory.CustomerFactory;
+import framework.util.Utils;
 
 import java.util.Collection;
 
 public class CustomerServiceImpl implements CustomerService {
-	private static final String COMPANY = "company";
-	private static final String PERSONAL = "personal";
+	private static final String COMPANY = Utils.COMPANY;
+	private static final String PERSONAL = Utils.PERSONAL;
 
 	private CustomerDAO customerDAO;
 	

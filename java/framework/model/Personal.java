@@ -1,5 +1,9 @@
 package framework.model;
 
-public class Personal extends Customer {
+import framework.util.Utils;
 
+public class Personal extends Customer {
+    public Personal(){
+        this.setType(Utils.PERSONAL);
+    }
 }
