@@ -1,6 +1,6 @@
-package creditcard.strategy;
+package framework.service.strategy;
 
-public interface CreditCardMonthlyRole {
+public interface CreditCardMonthlyRoleStrategy {
     double monthlyInterest(double balance);
     double minimumPayment(double balance);
 }

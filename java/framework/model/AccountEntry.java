@@ -1,9 +1,9 @@
 package framework.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class AccountEntry {
-	private Date date;
+	private LocalDate date;
 	private double amount;
 	private String description;
 	private String fromAccountNumber;
@@ -12,13 +12,16 @@ public class AccountEntry {
 	public AccountEntry() {
 	}
 
+	public AccountEntry(LocalDate now, double amount, String description, String accountNumber, String name) {
+		this.date=now;
+		this.amount=amount;
+		this.description=description;
+		this.fromAccountNumber=accountNumber;
+		this.fromPersonName=name;
+	}
+
 	public AccountEntry(double amount, String description, String fromAccountNumber, String fromPersonName) {
-		super();
-		this.date = new Date();
-		this.amount = amount;
-		this.description = description;
-		this.fromAccountNumber = fromAccountNumber;
-		this.fromPersonName = fromPersonName;
+		this(LocalDate.now(), amount, description, fromAccountNumber, fromPersonName);
 	}
 
 	public double getAmount() {
@@ -29,11 +32,11 @@ public class AccountEntry {
 		this.amount = amount;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

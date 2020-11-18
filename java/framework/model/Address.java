@@ -1,4 +1,4 @@
-package creditcard.model;
+package framework.model;
 
 public class Address {
     private String street;

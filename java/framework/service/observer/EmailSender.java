@@ -1,8 +1,7 @@
 package framework.service.observer;
 
-import creditcard.model.CreditCardAccount;
-import framework.model.Customer;
 import framework.model.Account;
+import framework.model.Customer;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;

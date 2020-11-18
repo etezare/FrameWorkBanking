@@ -8,7 +8,6 @@ import framework.model.AccountEntry;
 import framework.model.Customer;
 import framework.service.template.AccountMonthlyBillingReport;
 import framework.service.template.MonthlyBillingReport;
-import framework.util.Utils;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -32,8 +31,8 @@ public class App {
 			ae.forEach(y -> {
 				System.out.println(String.format("**** Entry: %s %s %s",
 						y.getDescription(),
-						Utils.convertDateToString(y.getDate()),
-						String.valueOf(y.getAmount())
+						y.getDate().toString(),
+						y.getAmount()
 				));
 			}
 			);

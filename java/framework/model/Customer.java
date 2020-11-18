@@ -8,7 +8,9 @@ public abstract class Customer {
 	List<Account> accountList = new ArrayList<>();
 
 	private String customerId;
+
 	private String name;
+
 	private String email;
 
 	private String type;

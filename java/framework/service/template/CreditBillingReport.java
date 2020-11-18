@@ -1,12 +1,21 @@
-package creditcard.model;
+package framework.service.template;
+
+import framework.model.Account;
+import framework.model.AccountEntry;
+import framework.model.CreditCardAccount;
+import framework.model.CustomerCredit;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
-public class BillingReport {
-    private Collection<CreditCardAccount>creditCardAccounts;
+public class CreditBillingReport {
+    private Collection<Account>creditCardAccounts;
     private LocalDate lastMonth;
-    public BillingReport(Collection<CreditCardAccount> accounts) {
+    public CreditBillingReport(Collection<Account> accounts) {
         this.creditCardAccounts=accounts;
         getLastMonth();
 
@@ -26,7 +35,8 @@ public class BillingReport {
 
     public List<String> getBillingReport(){
         List<String> reports=new ArrayList<>();
-        for(CreditCardAccount creditCardAccount:creditCardAccounts) {
+        for(Account account:creditCardAccounts) {
+            CreditCardAccount creditCardAccount = (CreditCardAccount) account;
             String report;
             Collection<AccountEntry> accountEntryList = creditCardAccount.getEntryList();
 
@@ -36,7 +46,7 @@ public class BillingReport {
             double newBalance =calculateNewBalance(previousBalance,totalCredits,totalCharges,creditCardAccount);
             double totalDue = calculateTotalDue(creditCardAccount,newBalance);
             System.out.println("----------billing Report--------------------------");
-            Customer customer = creditCardAccount.getCustomer();
+            CustomerCredit customer = (CustomerCredit) creditCardAccount.getCustomer();
             report="Name= " + customer.getName() + " address=" + customer.getAddress().toString() +
                     "  cc=" + creditCardAccount.getAccountNumber()
                     + " type=" + creditCardAccount.getAccountType()+"\n"+"previous balance " + previousBalance+

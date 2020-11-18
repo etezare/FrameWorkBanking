@@ -1,6 +1,6 @@
-package creditcard.strategy;
+package framework.service.strategy;
 
-public class BronzeMonthlyRole implements CreditCardMonthlyRole {
+public class CreditBronzeMonthlyRoleStrategy implements CreditCardMonthlyRoleStrategy {
     @Override
     public double monthlyInterest(double balance) {
         return 0.1*balance;

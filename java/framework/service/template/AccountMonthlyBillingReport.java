@@ -2,14 +2,9 @@ package framework.service.template;
 
 import framework.model.Account;
 import framework.model.AccountEntry;
-import framework.service.AccountServiceImpl;
-import framework.util.Utils;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class AccountMonthlyBillingReport extends MonthlyBillingReport {
@@ -26,7 +21,7 @@ public class AccountMonthlyBillingReport extends MonthlyBillingReport {
     void showPreviousBalance(LocalDate reportDate) {
         List<AccountEntry> accountEntries = account.getEntryList()
                 .stream()
-                .filter(ae -> ae.getDate().compareTo(Utils.convertLocalDateToDate(reportDate)) < 0)
+                .filter(ae -> ae.getDate().compareTo(reportDate) < 0)
                 .collect(Collectors.toList());
 
         this.prevBalance = accountEntries.stream().mapToDouble(x -> x.getAmount()).sum();
@@ -57,7 +52,7 @@ public class AccountMonthlyBillingReport extends MonthlyBillingReport {
     void showBalance(LocalDate reportDate) {
         List<AccountEntry> accountEntries = account.getEntryList()
                 .stream()
-                .filter(ae -> ae.getDate().compareTo(Utils.convertLocalDateToDate(reportDate)) == 0)
+                .filter(ae -> ae.getDate().compareTo(reportDate) == 0)
                 .collect(Collectors.toList());
 
         balance = accountEntries.stream().mapToDouble(x -> x.getAmount()).sum();

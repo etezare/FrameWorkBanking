@@ -1,7 +1,7 @@
-package creditcard.strategy;
+package framework.service.strategy;
 
 
-public class SilverMonthlyRole implements CreditCardMonthlyRole {
+public class CreditSilverMonthlyRoleStrategy implements CreditCardMonthlyRoleStrategy {
 
 
     @Override
