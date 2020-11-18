@@ -1,9 +1,9 @@
-package framework.service;
+package creditcard.service;
 
-import framework.dao.CreditAccountDAO;
+import creditcard.dao.CreditAccountDAO;
+import creditcard.model.CreditCardAccount;
+import creditcard.model.CustomerCredit;
 import framework.model.Account;
-import framework.model.CreditCardAccount;
-import framework.model.CustomerCredit;
 import framework.service.factory.AccountFactory;
 import framework.service.observer.EmailSender;
 import framework.service.observer.Observer;
@@ -50,7 +50,7 @@ public class CreditAccountServiceImpl implements CreditAccountService {
     }
 
     @Override
-    public List<Account> getAllAccounts() {
+    public List<Account> getList() {
         return accountDAO.getList();
     }
 

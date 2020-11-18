@@ -1,4 +1,7 @@
-package framework.model;
+package creditcard.model;
+
+import framework.model.Address;
+import framework.model.Customer;
 
 public class CustomerCredit extends Customer {
 	

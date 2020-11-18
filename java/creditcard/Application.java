@@ -1,13 +1,13 @@
 package creditcard;
 
+import creditcard.model.CreditCardAccount;
+import creditcard.model.CustomerCredit;
+import creditcard.service.CreditAccountService;
+import creditcard.service.CreditAccountServiceImpl;
 import framework.model.Account;
 import framework.model.AccountEntry;
 import framework.model.Address;
-import framework.model.CreditCardAccount;
 import framework.model.Customer;
-import framework.model.CustomerCredit;
-import framework.service.CreditAccountService;
-import framework.service.CreditAccountServiceImpl;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class Application {
 		// show balances
 		List<String> reports=accountService.billingReport();
 		accountService.addInterest();
-		List<Account> accountlist = accountService.getAllAccounts();
+		List<Account> accountlist = accountService.getList();
 		Customer customer4=null;
 		for (Account accountFromDB : accountlist) {
 			CreditCardAccount account = (CreditCardAccount) accountFromDB;

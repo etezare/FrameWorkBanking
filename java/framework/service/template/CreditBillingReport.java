@@ -1,9 +1,9 @@
 package framework.service.template;
 
+import creditcard.model.CreditCardAccount;
+import creditcard.model.CustomerCredit;
 import framework.model.Account;
 import framework.model.AccountEntry;
-import framework.model.CreditCardAccount;
-import framework.model.CustomerCredit;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

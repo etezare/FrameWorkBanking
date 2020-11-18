@@ -1,4 +1,4 @@
-package framework.service;
+package banking.service;
 
 import framework.dao.AccountDAO;
 import framework.model.Account;
@@ -6,8 +6,9 @@ import framework.model.AccountEntry;
 import framework.model.Company;
 import framework.model.Customer;
 import framework.model.Personal;
+import framework.service.CustomerService;
+import framework.service.CustomerServiceImpl;
 import framework.service.factory.AccountFactory;
-import framework.service.factory.CustomerFactory;
 import framework.service.observer.EmailSender;
 import framework.service.observer.Observer;
 import framework.service.strategy.BankInterestStrategy;
@@ -16,7 +17,7 @@ import framework.service.strategy.InterestStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountServiceImpl implements AccountService {
+public class BankingAccountServiceImpl implements BankingAccountService {
   private List<Observer<Account>> observerList = new ArrayList<>();
 
   private AccountDAO accountDAO = new AccountDAO();
@@ -25,7 +26,7 @@ public class AccountServiceImpl implements AccountService {
 
   private InterestStrategy interestStrategy = new BankInterestStrategy();
 
-  public AccountServiceImpl() {
+  public BankingAccountServiceImpl() {
     this.addObserver(new EmailSender());
   }
 
@@ -57,11 +58,6 @@ public class AccountServiceImpl implements AccountService {
   public Account getAccount(String accountNumber) {
     Account entity = accountDAO.getById(accountNumber);
     return entity;
-  }
-
-  @Override
-  public List<Account> getAllAccounts() {
-    return accountDAO.getList();
   }
 
   @Override

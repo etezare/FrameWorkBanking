@@ -1,9 +1,7 @@
 package framework.dao;
 
 import framework.database.Accounts;
-import framework.database.Customers;
 import framework.model.Account;
-import framework.model.Customer;
 
 import java.util.List;
 
@@ -17,7 +15,7 @@ public class AccountDAO implements DAO<Account, String> {
 	@Override
 	public Account getById(String id) {
 		return Accounts.accounts.stream()
-				.filter(x -> x.getAccountNumber().equals(id))
+				.filter(account -> account.getAccountNumber().equals(id))
 				.findFirst()
 				.orElse(null);
 	}
@@ -36,10 +34,10 @@ public class AccountDAO implements DAO<Account, String> {
 	@Override
 	public boolean update(Account a) {
 		Account entity = getById(a.getAccountNumber());
-		if (entity == null) {
-			return false;
+		if (entity != null) {
+			Accounts.accounts.remove(entity); // remove the old
+			Accounts.accounts.add(a); // add the new
 		}
-		entity.setAccountNumber(a.getAccountNumber());
 		return true;
 	}
 }

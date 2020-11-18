@@ -1,4 +1,4 @@
-package framework.service.strategy;
+package creditcard.service.strategy;
 
 
 public class CreditSilverMonthlyRoleStrategy implements CreditCardMonthlyRoleStrategy {

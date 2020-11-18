@@ -1,9 +1,9 @@
 package banking.ui;
 
+import banking.service.BankingAccountService;
+import banking.service.BankingAccountServiceImpl;
 import framework.model.Account;
 import framework.model.CheckingAccount;
-import framework.service.AccountService;
-import framework.service.AccountServiceImpl;
 import framework.service.command.DepositCommand;
 import framework.service.command.WithdrawCommand;
 import framework.service.factory.AccountFactory;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class BankFrm extends JFrame {
 
-	public AccountService accountService = new AccountServiceImpl();
+	public BankingAccountService accountService = new BankingAccountServiceImpl();
 
 	/****
 	 * init variables in the object

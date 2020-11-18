@@ -1,6 +1,8 @@
-package framework.model;
+package creditcard.model;
 
-import framework.service.strategy.CreditCardMonthlyRoleStrategy;
+import creditcard.service.strategy.CreditCardMonthlyRoleStrategy;
+import framework.model.Account;
+import framework.model.AccountEntry;
 
 import java.time.LocalDate;
 
