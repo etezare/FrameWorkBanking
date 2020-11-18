@@ -12,4 +12,15 @@ public class DateUtils {
     }
     return localDate.format(DateTimeFormatter.ofPattern(MM_DD_YYYY));
   }
+
+  public static LocalDate stringToLocalDate(String dateString){
+
+    if(dateString == null || "".equals(dateString)) {
+      return null;
+    }
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(MM_DD_YYYY);
+
+    //convert String to LocalDate
+    return LocalDate.parse(dateString, formatter);
+  }
 }

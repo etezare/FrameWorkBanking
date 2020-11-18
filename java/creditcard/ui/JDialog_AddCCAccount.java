@@ -3,9 +3,12 @@ package creditcard.ui;
 		A basic implementation of the JDialog class.
 */
 
+import creditcard.model.CreditCardAccount;
 import creditcard.model.CustomerCredit;
+import framework.model.Account;
 import framework.model.Address;
 import framework.service.factory.CustomerFactory;
+import framework.util.DateUtils;
 
 public class JDialog_AddCCAccount extends javax.swing.JDialog
 {
@@ -212,10 +215,11 @@ public class JDialog_AddCCAccount extends javax.swing.JDialog
 		CustomerCredit customer = new CustomerCredit(parentframe.clientName, JTextField_Email.getText(),
 				address, CustomerFactory.PERSONAL);
 
-		parentframe.accountService.createAccount(JTextField_CCNR.getText(),
+		Account account = parentframe.accountService.createAccount(JTextField_CCNR.getText(),
 				customer,
 				parentframe.accountType);
-
+		CreditCardAccount creditCardAccount = (CreditCardAccount)account;
+		creditCardAccount.setExpirationDate(DateUtils.stringToLocalDate(parentframe.expdate));
        dispose();
 	}
 
