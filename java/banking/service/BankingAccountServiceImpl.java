@@ -51,7 +51,7 @@ public class BankingAccountServiceImpl implements Subject, BankingAccountService
       customer = customerService.createCustomer(customerId, customerId, customerType);
     }
 
-    customer.setEmail(email);
+    customer.setEmail("dhailu@miu.edu");
     customer.getAccountList().add(account);
     account.setCustomer(customer);
 
