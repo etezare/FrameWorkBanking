@@ -5,10 +5,12 @@ import framework.service.AccountService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 abstract public class MonthlyBillingReport {
     protected AccountService accountService;
-
+    protected String reportString = "";
     protected Account account;
 
     private LocalDate reportDate = LocalDate.now();
@@ -37,6 +39,11 @@ abstract public class MonthlyBillingReport {
         this.showTotalDebit(reportDate);
         this.showBalance(reportDate);
         this.hook();
+    }
+
+    public String getReportString() {
+        showReport();
+        return reportString;
     }
 
     public void setReportDate(LocalDate reportDate) {

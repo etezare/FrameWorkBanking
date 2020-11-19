@@ -1,5 +1,6 @@
 package banking.service;
 
+import creditcard.model.CreditCardAccount;
 import framework.dao.AccountDAO;
 import framework.model.Account;
 import framework.model.AccountEntry;
@@ -11,8 +12,11 @@ import framework.service.observer.EmailSender;
 import framework.service.observer.Observer;
 import framework.service.strategy.BankInterestStrategy;
 import framework.service.strategy.InterestStrategy;
+import framework.service.template.AccountMonthlyBillingReport;
+import framework.service.template.MonthlyBillingReport;
 import framework.util.Utils;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,9 +128,15 @@ public class BankingAccountServiceImpl implements BankingAccountService {
 
   @Override
   public List<String> billingReport() {
-//    List<Account> accounts = accountDAO.getList();
-//    AccountMonthlyBillingReport billingReport = new AccountMonthlyBillingReport(accounts, LocalDate.now());
-//    return billingReport.getBillingReport();
-    return new ArrayList<>();
+    List<Account> accountList = getList();
+    List<String> stringList = new ArrayList<>();
+    for (Account account : accountList){
+      if (!(account instanceof CreditCardAccount)) {
+        MonthlyBillingReport mbr = new AccountMonthlyBillingReport(account, LocalDate.now());
+        stringList.add(mbr.getReportString());
+      }
+    }
+
+    return stringList;
   }
 }

@@ -25,7 +25,9 @@ public class AccountMonthlyBillingReport extends MonthlyBillingReport {
                 .collect(Collectors.toList());
 
         this.prevBalance = accountEntries.stream().mapToDouble(x -> x.getAmount()).sum();
-        System.out.println(String.format("Previous Balance: %s", prevBalance));
+        String reportLine = String.format("Previous Balance: %s", prevBalance);
+        reportString += reportLine;
+        System.out.println(reportLine);
     }
 
     @Override
@@ -35,7 +37,9 @@ public class AccountMonthlyBillingReport extends MonthlyBillingReport {
                 .filter(ae -> ae.getAmount() < 0)
                 .collect(Collectors.toList());
         totalCredit = accountEntries.stream().mapToDouble(x -> x.getAmount()).sum();
-        System.out.println(String.format("Total credit: %s", totalCredit));
+        String reportLine = String.format("Total credit: %s\n", totalCredit);
+        reportString += reportLine;
+        System.out.println(reportLine);
     }
 
     @Override
@@ -45,7 +49,10 @@ public class AccountMonthlyBillingReport extends MonthlyBillingReport {
                 .filter(ae -> ae.getAmount() >= 0)
                 .collect(Collectors.toList());
         totalDebit = accountEntries.stream().mapToDouble(x -> x.getAmount()).sum();
-        System.out.println(String.format("Total debit: %s", totalDebit));
+
+        String reportLine = String.format("Total debit: %s\n", totalDebit);
+        reportString += reportLine;
+        System.out.println(reportLine);
     }
 
     @Override
@@ -58,6 +65,9 @@ public class AccountMonthlyBillingReport extends MonthlyBillingReport {
         balance = accountEntries.stream().mapToDouble(x -> x.getAmount()).sum();
         balance += prevBalance + totalDebit + totalCredit;
 
-        System.out.println(String.format("Balance: %s", balance));
+        String reportLine = String.format("Balance: %s", balance);
+        reportString += reportLine;
+
+        System.out.println(reportLine);
     }
 }
