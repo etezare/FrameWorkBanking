@@ -3,9 +3,7 @@ package banking.service;
 import framework.dao.AccountDAO;
 import framework.model.Account;
 import framework.model.AccountEntry;
-import framework.model.Company;
 import framework.model.Customer;
-import framework.model.Personal;
 import framework.service.CustomerService;
 import framework.service.CustomerServiceImpl;
 import framework.service.factory.AccountFactory;
@@ -13,6 +11,7 @@ import framework.service.observer.EmailSender;
 import framework.service.observer.Observer;
 import framework.service.strategy.BankInterestStrategy;
 import framework.service.strategy.InterestStrategy;
+import framework.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,15 +78,13 @@ public class BankingAccountServiceImpl implements BankingAccountService {
   }
 
   private void notify(Account account, double amount) {
-    Customer c = account.getCustomer();
+    Customer customer = account.getCustomer();
 
-    if (c != null) {
-      if (c instanceof Company){
-        notifyObserver(account);
-      } else if (c instanceof Personal) {
-        if (amount > 500 || account.getBalance() >500) {
-          notifyObserver(account);
-        }
+    if (customer != null) {
+      if (customer.getType().equalsIgnoreCase(Utils.COMPANY) ||
+          (customer.getType().equalsIgnoreCase(Utils.PERSONAL)
+              && (amount > 500 || account.getBalance() < 0))) {
+        notify(account, amount);
       }
     }
   }
