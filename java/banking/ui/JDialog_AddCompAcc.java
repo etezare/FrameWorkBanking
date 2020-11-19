@@ -151,7 +151,8 @@ public class JDialog_AddCompAcc extends javax.swing.JDialog
 		parentframe.accountService.createAccount(JTextField_ACNR.getText(),
 				JTextField_NAME.getText(),
 				JRadioButton_Chk.isSelected() ? AccountFactory.CHECKING : AccountFactory.SAVING,
-				CustomerFactory.COMPANY);
+				CustomerFactory.COMPANY,
+				"");
 
 	   dispose();
 			 
