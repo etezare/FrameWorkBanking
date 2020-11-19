@@ -84,7 +84,7 @@ public class BankingAccountServiceImpl implements BankingAccountService {
       if (customer.getType().equalsIgnoreCase(Utils.COMPANY) ||
           (customer.getType().equalsIgnoreCase(Utils.PERSONAL)
               && (amount > 500 || account.getBalance() < 0))) {
-        notify(account, amount);
+        notifyObserver(account);
       }
     }
   }
