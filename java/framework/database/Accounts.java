@@ -14,15 +14,38 @@ import java.util.Date;
 import java.util.List;
 
 public class Accounts {
-  public static List<Account> accounts = new ArrayList<>();
-  public static final String GOLD = "gold";
-  public static final String SILVER = "silver";
-  public static final String BRONZE = "bronze";
-  static {
+  private Accounts(){}
+
+  public static List<Account> data = getInstance().getAccounts();
+  private volatile static Accounts instance;
+
+  private List<Account> accounts = new ArrayList<>();
+
+  private static Accounts getInstance() {
+    if (instance == null) {
+      synchronized (Accounts.class) {
+        if (instance == null) {
+          instance = new Accounts();
+        }
+      }
+    }
+    return instance;
+  }
+
+  
+  private List<Account> getAccounts() {
+    fakeDataGeneration();
+    return accounts;
+  }
+
+  private static final String GOLD = "gold";
+  private static final String SILVER = "silver";
+  private static final String BRONZE = "bronze";
+
+  private void fakeDataGeneration(){
     Faker faker = new Faker();
 
-    for (Customer c : Customers.customers){
-      //generating accounts
+    for (Customer c : Customers.data){
       Account account;
       if (Integer.valueOf(c.getCustomerId()) % 2 == 0)
         account = new CheckingAccount(faker.code().isbn10());
@@ -80,7 +103,6 @@ public class Accounts {
 
       accounts.add(creditCardAccount);
     }
-
   }
 
 }

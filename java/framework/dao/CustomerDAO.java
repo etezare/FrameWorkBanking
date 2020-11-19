@@ -9,12 +9,12 @@ public class CustomerDAO implements DAO<Customer, String> {
 
 	@Override
 	public List<Customer> getList() {
-		return Customers.customers;
+		return Customers.data;
 	}
 
 	@Override
 	public Customer getById(String id) {
-		return Customers.customers.stream()
+		return Customers.data.stream()
 				.filter(x -> x.getCustomerId().equals(id))
 				.findFirst()
 				.orElse(null);
@@ -22,13 +22,13 @@ public class CustomerDAO implements DAO<Customer, String> {
 
 	@Override
 	public void add(Customer customer) {
-		Customers.customers.add(customer);
+		Customers.data.add(customer);
 	}
 
 	@Override
 	public void delete(String id) {
 		Customer c = getById(id);
-		Customers.customers.remove(c);
+		Customers.data.remove(c);
 	}
 
 	@Override
