@@ -6,7 +6,7 @@ public class CreditSilverMonthlyRoleStrategy implements CreditCardMonthlyRoleStr
 
     @Override
     public double monthlyInterest(double balance) {
-        return 0.8*balance;
+        return 0.08*balance;
     }
 
     @Override

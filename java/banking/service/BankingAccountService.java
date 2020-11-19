@@ -12,4 +12,5 @@ public interface BankingAccountService extends AccountService {
     Account createAccount(String accountNumber, String customerId, String type, String customerType);
 
     List<String> billingReport();
-}
+
+    }
