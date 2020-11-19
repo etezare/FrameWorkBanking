@@ -26,7 +26,7 @@ public class DateUtils {
     return LocalDate.parse(dateString, formatter);
   }
 
-  public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+  public static LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
     return dateToConvert.toInstant()
         .atZone(ZoneId.systemDefault())
         .toLocalDate();

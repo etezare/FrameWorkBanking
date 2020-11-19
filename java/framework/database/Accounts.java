@@ -1,15 +1,23 @@
 package framework.database;
 
 import com.github.javafaker.Faker;
+import creditcard.model.CreditCardAccount;
+import creditcard.model.CustomerCredit;
 import framework.model.*;
+import framework.service.factory.AccountFactory;
+import framework.service.factory.CustomerFactory;
+import framework.util.DateUtils;
 import framework.util.Utils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Accounts {
   public static List<Account> accounts = new ArrayList<>();
-
+  public static final String GOLD = "gold";
+  public static final String SILVER = "silver";
+  public static final String BRONZE = "bronze";
   static {
     Faker faker = new Faker();
 
@@ -38,6 +46,41 @@ public class Accounts {
 
       accounts.add(account);
     }
+
+//Credit account
+    for (int i = 0; i < 10; i++) {
+      Address address = new Address(
+              faker.address().fullAddress(),
+              faker.address().state(),
+              Utils.randInt(5000, 9000),
+              faker.address().cityName());
+
+      CustomerCredit customer = new CustomerCredit(
+              faker.name().fullName(),
+              faker.animal().name() + "@gmail.com",
+              address,
+              CustomerFactory.PERSONAL);
+      customer.setCustomerId(faker.idNumber().invalidSvSeSsn());
+      String accType = GOLD;
+      if (Utils.randInt(1, 5) / 3 == 0)
+        accType = GOLD;
+      else if (Utils.randInt(1, 5) / 3 == 1)
+        accType = SILVER;
+      else
+        accType = BRONZE;
+      String accNum = faker.idNumber().ssnValid();
+
+      Account creditAccount = AccountFactory.createCreditAccount(accNum, customer, accType);
+      CreditCardAccount creditCardAccount = (CreditCardAccount) creditAccount;
+      creditCardAccount.setExpirationDate(DateUtils.convertToLocalDateViaInstant(faker.date().between(org.apache.commons.lang3.time.DateUtils.addDays(new Date(), -30), new Date())));
+
+      creditCardAccount.setCustomer(customer);
+      creditCardAccount.deposit(Utils.randInt(500, 1000));
+      customer.getAccountList().add(creditCardAccount);
+
+      accounts.add(creditCardAccount);
+    }
+
   }
 
 }
