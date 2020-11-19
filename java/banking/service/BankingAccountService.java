@@ -9,7 +9,7 @@ import java.util.List;
 public interface BankingAccountService extends AccountService {
 
 
-    Account createAccount(String accountNumber, String customerId, String type, String customerType);
+    Account createAccount(String accountNumber, String customerId, String type, String customerType, String email);
 
     List<String> billingReport();
 

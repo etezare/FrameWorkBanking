@@ -40,7 +40,7 @@ public class BankingAccountServiceImpl implements Subject, BankingAccountService
   }
 
   @Override
-  public Account createAccount(String accountNumber, String customerId, String type, String customerType) {
+  public Account createAccount(String accountNumber, String customerId, String type, String customerType, String email) {
     Account account = AccountFactory.createAccount(type);
 
     account.setAccountNumber(accountNumber);
@@ -51,6 +51,7 @@ public class BankingAccountServiceImpl implements Subject, BankingAccountService
       customer = customerService.createCustomer(customerId, customerId, customerType);
     }
 
+    customer.setEmail(email);
     customer.getAccountList().add(account);
     account.setCustomer(customer);
 
