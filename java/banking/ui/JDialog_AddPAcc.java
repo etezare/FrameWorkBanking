@@ -3,7 +3,6 @@ package banking.ui;
 		A basic implementation of the JDialog class.
 */
 
-import framework.model.Account;
 import framework.service.factory.AccountFactory;
 import framework.service.factory.CustomerFactory;
 
@@ -188,7 +187,8 @@ public class JDialog_AddPAcc extends javax.swing.JDialog
 	   parentframe.accountService.createAccount(JTextField_ACNR.getText(),
 				 JTextField_NAME.getText(),
 				 JRadioButton_Chk.isSelected() ? AccountFactory.CHECKING : AccountFactory.SAVING,
-				 CustomerFactory.PERSONAL);
+				 CustomerFactory.PERSONAL,
+				 "");
        dispose();
 	}
 
