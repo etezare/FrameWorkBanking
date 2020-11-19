@@ -10,6 +10,7 @@ import framework.service.CustomerServiceImpl;
 import framework.service.factory.AccountFactory;
 import framework.service.observer.EmailSender;
 import framework.service.observer.Observer;
+import framework.service.observer.Subject;
 import framework.service.strategy.BankInterestStrategy;
 import framework.service.strategy.InterestStrategy;
 import framework.service.template.AccountMonthlyBillingReport;
@@ -20,7 +21,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BankingAccountServiceImpl implements BankingAccountService {
+public class BankingAccountServiceImpl implements Subject, BankingAccountService {
   private List<Observer<Account>> observerList = new ArrayList<>();
 
   private AccountDAO accountDAO = new AccountDAO();

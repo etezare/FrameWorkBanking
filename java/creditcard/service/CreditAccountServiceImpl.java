@@ -9,13 +9,14 @@ import framework.model.Customer;
 import framework.service.factory.AccountFactory;
 import framework.service.observer.EmailSender;
 import framework.service.observer.Observer;
+import framework.service.observer.Subject;
 import framework.service.template.CreditBillingReport;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CreditAccountServiceImpl implements CreditAccountService {
+public class CreditAccountServiceImpl implements CreditAccountService, Subject {
     Collection<Observer> observerList = new ArrayList<>();
     private CreditAccountDAO accountDAO;
     public CreditAccountServiceImpl() {

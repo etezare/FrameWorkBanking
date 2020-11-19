@@ -15,11 +15,7 @@ public interface AccountService {
 
     void withdraw (String accountNumber, double amount);
 
-    void addObserver(Observer observer);
 
-    void removeObservable(Observer observer);
-
-    void notifyObserver(Account account);
 
     void addInterest();
 }
