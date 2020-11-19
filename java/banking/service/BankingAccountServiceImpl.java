@@ -48,7 +48,7 @@ public class BankingAccountServiceImpl implements Subject, BankingAccountService
     Customer customer = customerService.getCustomer(customerId);
 
     if (customer == null) {
-      customer = customerService.createCustomer(customerId, "No Name", customerType);
+      customer = customerService.createCustomer(customerId, customerId, customerType);
     }
 
     customer.getAccountList().add(account);
