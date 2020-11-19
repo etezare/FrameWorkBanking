@@ -17,6 +17,7 @@ public class Accounts {
   private Accounts(){}
 
   public static List<Account> data = getInstance().getAccounts();
+
   private volatile static Accounts instance;
 
   private List<Account> accounts = new ArrayList<>();
@@ -32,7 +33,7 @@ public class Accounts {
     return instance;
   }
 
-  
+
   private List<Account> getAccounts() {
     fakeDataGeneration();
     return accounts;

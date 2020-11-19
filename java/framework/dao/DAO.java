@@ -15,19 +15,4 @@ public interface DAO<T, ID> {
 
   boolean update(T t);
 
-//
-//  //Customer Data
-//  List<Customer> getCustomerList();
-//
-//  Customer getCustomerById(String customerId);
-//
-//  void addCustomer(String customerId, String customerName);
-//
-//  void addCustomer(Customer customer);
-//
-//  void deleteCustomer(Customer customer);
-//
-//  boolean updateCustomer(Customer customer, String name);
-
-  //End of Customer Data
 }
