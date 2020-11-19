@@ -208,12 +208,12 @@ public class JDialog_AddCCAccount extends javax.swing.JDialog
            }
            
 	   parentframe.newaccount=true;
-
-		Address address = new Address(parentframe.street, parentframe.state,
-				Long.parseLong(parentframe.zip),parentframe.city);
-
-		CustomerCredit customer = new CustomerCredit(parentframe.clientName, JTextField_Email.getText(),
-				address, CustomerFactory.PERSONAL);
+//
+//		Address address = new Address(parentframe.street, parentframe.state,
+//				Long.parseLong(parentframe.zip),parentframe.city);
+//
+//		CustomerCredit customer = new CustomerCredit(parentframe.clientName, JTextField_Email.getText(),
+//				address, CustomerFactory.PERSONAL);
 
 		Account account = parentframe.accountService.createAccount(JTextField_CCNR.getText(),
 				parentframe.accountType,parentframe.clientName,JTextField_Email.getText(),
