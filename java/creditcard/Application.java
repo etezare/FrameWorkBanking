@@ -18,14 +18,17 @@ public class Application {
 	public static void main(String[] args) {
 		CreditAccountService accountService = new CreditAccountServiceImpl();
 
-		Address address=new Address("7514geren","Iowa",12343,"fairfiled");
-		CustomerCredit customer=new CustomerCredit("Essey","etezare@miux.edu",address,"company");
-		CustomerCredit customer2=new CustomerCredit("Dawit","dhailu@miux.edu",address,"personal");
-		CustomerCredit customer3=new CustomerCredit("Brhane","bteklehaimanot@miux.edu",address,"personal");
+//		Address address=new Address("7514geren","Iowa",12343,"fairfiled");
+//		CustomerCredit customer=new CustomerCredit("Essey","etezare@miux.edu",address,"company");
+//		CustomerCredit customer2=new CustomerCredit("Dawit","dhailu@miux.edu",address,"personal");
+//		CustomerCredit customer3=new CustomerCredit("Brhane","bteklehaimanot@miux.edu",address,"personal");
 		// create 2 accounts;
-		accountService.createAccount("1263862", customer,"bronze");
-		accountService.createAccount("4253892", customer2,"gold");
-		accountService.createAccount("12345",customer3,"Silver");
+		accountService.createAccount("1263862","bronze","Essey","etezare@miux.edu",
+				"company","Philadelhpia","PA","23823Green",19151);
+		accountService.createAccount("4253892","silver","Dawit","dhailu@miux.edu",
+				"personal","Adi Abayto","PA","23823Green",23232);
+		accountService.createAccount("12345","gold","Dawit","bteklehaimanot@miux.edu",
+				"personal","Asmara","PA","23823Green",12123);
 		// use account 1;
 
 		accountService.deposit("1263862", 240);
@@ -48,7 +51,7 @@ public class Application {
 			CreditCardAccount account = (CreditCardAccount) accountFromDB;
 			customer4 = account.getCustomer();
 			System.out.println("Statement for Account: " + account.getAccountNumber());
-			System.out.println("Account Holder: " + customer.getName());
+			System.out.println("Account Holder: " + customer4.getName());
 
 			System.out.println("-Date-------------------------"
 					+ "-Description------------------"

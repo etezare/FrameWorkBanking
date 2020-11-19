@@ -216,8 +216,9 @@ public class JDialog_AddCCAccount extends javax.swing.JDialog
 				address, CustomerFactory.PERSONAL);
 
 		Account account = parentframe.accountService.createAccount(JTextField_CCNR.getText(),
-				customer,
-				parentframe.accountType);
+				parentframe.accountType,parentframe.clientName,JTextField_Email.getText(),
+				CustomerFactory.PERSONAL,parentframe.city,parentframe.state,
+				parentframe.street,Long.parseLong(parentframe.zip));
 		CreditCardAccount creditCardAccount = (CreditCardAccount)account;
 		creditCardAccount.setExpirationDate(DateUtils.stringToLocalDate(parentframe.expdate));
        dispose();

@@ -4,6 +4,8 @@ import creditcard.dao.CreditAccountDAO;
 import creditcard.model.CreditCardAccount;
 import creditcard.model.CustomerCredit;
 import framework.model.Account;
+import framework.model.Address;
+import framework.model.Customer;
 import framework.service.factory.AccountFactory;
 import framework.service.observer.EmailSender;
 import framework.service.observer.Observer;
@@ -22,7 +24,10 @@ public class CreditAccountServiceImpl implements CreditAccountService {
     }
 
     @Override
-    public CreditCardAccount createAccount(String accountNumber, CustomerCredit customer, String type) {
+    public CreditCardAccount createAccount(String accountNumber, String type,String customerName,String email
+            ,String customertype,String city,String state,String street,long zipcode) {
+        Address address=new Address(street,state,zipcode,city);
+        CustomerCredit customer=new CustomerCredit(customerName,email,address,customertype);
         CreditCardAccount creditCardAccount = AccountFactory.createCreditAccount(accountNumber,customer,type);
         accountDAO.add(creditCardAccount);
         return creditCardAccount;

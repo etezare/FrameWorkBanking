@@ -141,16 +141,9 @@ public class JDialog_AddCompAcc extends javax.swing.JDialog
            parentframe.accountType="S";
 	   parentframe.newaccount=true;
 
-		Address address = new Address(parentframe.street, parentframe.state,
-				Long.parseLong(parentframe.zip),parentframe.city);
 
-		CustomerCredit customer = new CustomerCredit(parentframe.clientName, "",
-				address, parentframe.accountType);
-
-		parentframe.accountService.createAccount("",
-				customer,
-				CustomerFactory.COMPANY);
-
+		parentframe.accountService.createAccount("",parentframe.accountType,parentframe.clientName,"",CustomerFactory.COMPANY,parentframe.city
+				,parentframe.state,parentframe.street,Long.parseLong(parentframe.zip));
 	   dispose();
 			 
 	}
