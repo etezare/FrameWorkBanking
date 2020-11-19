@@ -134,6 +134,7 @@ public class BankingAccountServiceImpl implements Subject, BankingAccountService
     for (Account account : accountList){
       if (!(account instanceof CreditCardAccount)) {
         MonthlyBillingReport mbr = new AccountMonthlyBillingReport(account, LocalDate.now());
+        mbr.printSummary();
         stringList.add(mbr.getReportString());
       }
     }

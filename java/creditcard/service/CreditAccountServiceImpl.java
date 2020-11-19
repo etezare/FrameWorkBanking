@@ -10,8 +10,12 @@ import framework.service.factory.AccountFactory;
 import framework.service.observer.EmailSender;
 import framework.service.observer.Observer;
 import framework.service.observer.Subject;
+import framework.service.template.AccountMonthlyBillingReport;
 import framework.service.template.CreditBillingReport;
+import framework.service.template.CreditMonthlyBillingReport;
+import framework.service.template.MonthlyBillingReport;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -112,9 +116,20 @@ public class CreditAccountServiceImpl implements CreditAccountService, Subject {
     }
     @Override
     public List<String> billingReport() {
-        List<Account> accounts = accountDAO.getList();
-        CreditBillingReport billingReport = new CreditBillingReport(accounts);
-        return billingReport.getBillingReport();
+//        List<Account> accounts = accountDAO.getList();
+//        CreditBillingReport billingReport = new CreditBillingReport(accounts);
+//        return billingReport.getBillingReport();
+
+        List<Account> accountList = accountDAO.getList();
+        List<String> stringList = new ArrayList<>();
+        for (Account account : accountList){
+            if (account instanceof CreditCardAccount) {
+                CreditMonthlyBillingReport mbr = new CreditMonthlyBillingReport(account, LocalDate.now());
+                stringList.add(mbr.getReportString());
+            }
+        }
+
+        return stringList;
     }
 
 }

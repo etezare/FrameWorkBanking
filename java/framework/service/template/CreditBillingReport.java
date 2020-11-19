@@ -96,22 +96,25 @@ public class CreditBillingReport extends MonthlyBillingReport{
 
 
     @Override
-    void showPreviousBalance(LocalDate reportDate) {
+    double calcPreviousBalance(LocalDate reportDate) {
         System.out.println(String.format("Credit Card Billing Report - As of " + LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))));
+        return 0;
     }
 
     @Override
-    void showTotalCredit(LocalDate reportDate) {}
+    double calcTotalCredit(LocalDate reportDate) {
+        return 0;
+    }
 
     @Override
-    void showTotalDebit(LocalDate reportDate) {}
+    double calcTotalDebit(LocalDate reportDate) {
+        return 0;
+    }
 
     @Override
-    void showBalance(LocalDate reportDate) {
-        List<String> billReport = getBillingReport();
-        billReport.forEach(x -> {
-            System.out.println(x);
-        });
+    double calcBalance(LocalDate reportDate) {
+
+        return 0;
     }
 
 }
