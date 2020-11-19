@@ -30,6 +30,7 @@ public class Customers {
       } else {
         c.setType("Personal");
       }
+      c.setEmail("etezare@miu.edu");
       customers.add(c);
     }
   }

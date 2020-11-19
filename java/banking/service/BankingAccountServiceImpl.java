@@ -125,4 +125,11 @@ public class BankingAccountServiceImpl implements BankingAccountService {
     }
   }
 
+  @Override
+  public List<String> billingReport() {
+//    List<Account> accounts = accountDAO.getList();
+//    AccountMonthlyBillingReport billingReport = new AccountMonthlyBillingReport(accounts, LocalDate.now());
+//    return billingReport.getBillingReport();
+    return new ArrayList<>();
+  }
 }

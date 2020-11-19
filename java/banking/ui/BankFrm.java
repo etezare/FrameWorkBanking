@@ -83,6 +83,12 @@ public class BankFrm extends JFrame {
 		JButton_Addinterest.setText("Add interest");
 		JPanel1.add(JButton_Addinterest);
 		JButton_Withdraw.setBounds(468,164,96,33);
+
+		JButton_GenBill.setText("Generate Monthly bills");
+		JButton_GenBill.setActionCommand("jbutton");
+		JPanel1.add(JButton_GenBill);
+		JButton_GenBill.setBounds(24,50,192,33);
+
 		JButton_Exit.setText("Exit");
 		JPanel1.add(JButton_Exit);
 		JButton_Exit.setBounds(468,248,96,31);
@@ -101,6 +107,7 @@ public class BankFrm extends JFrame {
 		JButton_Deposit.addActionListener(lSymAction);
 		JButton_Withdraw.addActionListener(lSymAction);
 		JButton_Addinterest.addActionListener(lSymAction);
+		JButton_GenBill.addActionListener(lSymAction);
 
 		loadAll();
 	}
@@ -138,6 +145,7 @@ public class BankFrm extends JFrame {
 	JButton JButton_Withdraw = new JButton();
 	JButton JButton_Addinterest = new JButton();
 	JButton JButton_Exit = new JButton();
+	JButton JButton_GenBill = new JButton();
 
 	void exitApplication() {
 		try {
@@ -186,7 +194,8 @@ public class BankFrm extends JFrame {
 				JButtonWithdraw_actionPerformed(event);
 			else if (object == JButton_Addinterest)
 				JButtonAddinterest_actionPerformed(event);
-
+			else if (object == JButton_GenBill)
+				JButtonGenerateBill_actionPerformed(event);
 		}
 	}
     
@@ -337,4 +346,11 @@ public class BankFrm extends JFrame {
 		}
 	}
 
+	void JButtonGenerateBill_actionPerformed(java.awt.event.ActionEvent event)
+	{
+		JDialogGenBill billFrm = new JDialogGenBill();
+		billFrm.setBounds(450, 20, 400, 350);
+		billFrm.show();
+
+	}
 }
